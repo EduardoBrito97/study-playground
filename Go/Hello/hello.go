@@ -8,6 +8,7 @@ import (
 )
 
 // Every go application must have a main method -- libraries doesn't need to
+// Also need to do go mod init /example/package in the beginning so it constructs the go.mod file correctly
 func main() {
 	var nome bool
 	// Default value for bools are false -- not null
@@ -16,8 +17,15 @@ func main() {
 	// We can directly use functions from other files if its in the same dir
 	teste()
 
+	// This also happens with variables
+	fmt.Println(mainPackageVar)
+
 	// To use functions from other paths, tho, we need it initialized by capital letters
 	foo.Bar()
+
+	// And ofc also happens with variables
+	fmt.Println(foo.TestBar)
+	// fmt.Println(foo.lowerCaseBar) wont work cos lowerCaseBar doesnt start with capital letter
 
 	pointerTest()
 }
@@ -45,4 +53,14 @@ func pointerTest() {
 
 	// Its gonna be 99 since we changed it beforehanded
 	fmt.Println(testNumber)
+
+	// We can use blank identifiers!
+	var _, two = twoVariablesFunc()
+	fmt.Println(two)
+}
+
+// Functions that are not void must be specified returns
+// Its also possible to include two values instead of 1
+func twoVariablesFunc() (int, int) {
+	return 1, 2
 }
