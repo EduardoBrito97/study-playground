@@ -12,6 +12,9 @@ func HandleRouters(db *sql.DB) *mux.Router {
 
 	taskHandler := NewTaskHandler(db)
 	router.HandleFunc("/tasks", taskHandler.ReadTasks).Methods("GET")
+	router.HandleFunc("/tasks", taskHandler.CreateTask).Methods("POST")
+	router.HandleFunc("/tasks/{id}", taskHandler.UpdateTask).Methods("PUT")
+	router.HandleFunc("/tasks/{id}", taskHandler.DeleteTask).Methods("DELETE")
 
 	log.Println("Routers initialized successfully")
 
