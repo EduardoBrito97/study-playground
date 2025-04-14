@@ -9,6 +9,8 @@ import (
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
+
+	"com/br/simple-go-mod/migrations"
 )
 
 func DbSetup() *sql.DB {
@@ -43,4 +45,10 @@ func DbSetup() *sql.DB {
 
 	fmt.Println("Successful database connection.")
 	return db
+}
+
+func RunMigrations(db *sql.DB) {
+	migrations.CreateTaskTable(db)
+
+	log.Println("Migrations completed successfully.")
 }
