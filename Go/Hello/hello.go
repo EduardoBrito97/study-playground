@@ -5,6 +5,9 @@ import (
 	"example/hello/foo"
 	"fmt"
 	"strconv"
+
+	// We have the _ in the beginning because we're not directly using
+	_ "log"
 )
 
 // Every go application must have a main method -- libraries doesn't need to
