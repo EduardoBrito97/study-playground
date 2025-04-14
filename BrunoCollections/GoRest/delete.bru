@@ -1,0 +1,11 @@
+meta {
+  name: delete
+  type: http
+  seq: 4
+}
+
+delete {
+  url: localhost:8080/tasks/1
+  body: json
+  auth: inherit
+}
