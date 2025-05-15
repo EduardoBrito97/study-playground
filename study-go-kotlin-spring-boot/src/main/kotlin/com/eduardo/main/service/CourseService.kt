@@ -1,6 +1,5 @@
 package com.eduardo.main.service
 
-import com.eduardo.main.model.dto.CourseDto
 import com.eduardo.main.model.form.CourseForm
 import com.eduardo.main.model.mapper.CourseMapper
 import com.eduardo.main.repository.CourseRepository

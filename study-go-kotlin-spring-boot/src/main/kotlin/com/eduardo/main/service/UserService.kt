@@ -1,6 +1,5 @@
 package com.eduardo.main.service
 
-import com.eduardo.main.model.dto.UserDto
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.model.mapper.UserMapper
 import com.eduardo.main.repository.UserRepository
