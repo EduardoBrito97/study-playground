@@ -1,26 +1,50 @@
 package com.eduardo.main.service
 
-import com.eduardo.main.model.User
+import com.eduardo.main.model.dto.UserDto
+import com.eduardo.main.model.form.UserForm
+import com.eduardo.main.model.mapper.UserMapper
 import com.eduardo.main.repository.UserRepository
+import com.eduardo.main.view.UserView
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 @Service
-class UserService (private val userRepository: UserRepository) {
+class UserService(
+    private val userRepository: UserRepository,
+    val userMapper: UserMapper
+) {
 
     @Transactional
-    fun addUser(name: String) {
-        val user = User()
-        user.name = name
-
+    fun createUser(userForm: UserForm): UserView {
+        val user = userMapper.formToModel(userForm)
         userRepository.save(user)
+        return userMapper.modelToView(user)
     }
 
-    fun fetchUser(id: Int): User? {
-        return userRepository.findById(id).orElse(null)
+    @Transactional
+    fun updateUser(userForm: UserForm) : UserView {
+        val user = userMapper.formToModel(userForm)
+        userRepository.save(user)
+        return userMapper.modelToView(user)
     }
 
-    fun fetchAllUsers(): List<User> {
-        return userRepository.findAll()
+    @Transactional
+    fun deleteUser(id: Long) {
+        userRepository.deleteById(id)
+    }
+
+    fun fetchUser(id: Long): UserView? {
+        val user = userRepository.findById(id).orElse(null)
+        return if (user != null) {
+            userMapper.modelToView(user)
+        } else {
+            null
+        }
+    }
+
+    fun fetchUserDatabase(id: Long) = userRepository.findById(id).orElse(null)
+
+    fun fetchAllUsers(): List<UserView> {
+        return userRepository.findAll().map { userMapper.modelToView(it) }
     }
 }

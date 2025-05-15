@@ -1,24 +1,28 @@
 package com.eduardo.main.controllers
 
-import com.eduardo.main.model.User
+import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.service.UserService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
-class UserController (
+class UserController(
     private val userService: UserService
 ) {
 
-    @PostMapping("/add")
-    fun addUser(@RequestParam(name = "name") name : String) {
-        userService.addUser(name)
-    }
+    @PostMapping("/create")
+    fun createUser(@RequestBody @Valid user: UserForm) = userService.createUser(user)
+
+    @PutMapping("/update")
+    fun updateUser(@RequestBody @Valid user: UserForm) = userService.updateUser(user)
+
+    @DeleteMapping("/delete/{id}")
+    fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
+
+    @GetMapping("/{id}")
+    fun getUser(@PathVariable id: Long) = userService.fetchUser(id)
 
     @GetMapping("/list")
-    fun listUsers() : User {
-        val user = userService.fetchAllUsers().first()
-        println(user.name)
-        return user
-    }
+    fun listUsers() = userService.fetchAllUsers()
 }
