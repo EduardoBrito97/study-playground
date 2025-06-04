@@ -1,20 +1,21 @@
 package com.eduardo.main.model.database
 
 import jakarta.persistence.*
+import java.io.Serializable
 
 @Entity
 @Table(name = "users")
-data class User(
+data class User (
     @Id
-    @GeneratedValue
-    val id: Long? = null,
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
     @Column(nullable = false)
-    val name: String = "",
+    var name: String = "",
 
     @Column(nullable = false)
-    val username: String = "",
+    var username: String = "",
 
     @Column(nullable = false)
-    val password: String = ""
-)
+    var password: String = ""
+) : Serializable
