@@ -1,7 +1,6 @@
 package com.eduardo.main.repository
 
 import com.eduardo.main.model.database.Answer
-import jakarta.persistence.NamedQuery
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
