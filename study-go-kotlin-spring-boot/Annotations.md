@@ -33,6 +33,8 @@ To initialize the project, you can use https://start.spring.io/ and select the d
 ---
 **NOTES**
 
-When using Intellij, you can use the JPABuddy tool to autogenerate migrations for flyway. 
+When using Intellij, you can use the JPABuddy tool to autogenerate migrations for flyway.
+
+Although it's not available on Spring Initializr, you can add the ```springdoc-openapi-starter-webmvc-ui``` dependency to your project to have a Swagger UI for your API. It will automatically generate the documentation for your API based on the annotations you use in your code.
 
 ---
