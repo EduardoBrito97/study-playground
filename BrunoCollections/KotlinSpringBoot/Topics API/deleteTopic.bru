@@ -1,0 +1,15 @@
+meta {
+  name: deleteTopic
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/topic/delete/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}

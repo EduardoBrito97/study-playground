@@ -1,0 +1,34 @@
+meta {
+  name: updateTopic
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/topic/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "title": "",
+    "message": "",
+    "date": "",
+    "courseId": "",
+    "authorId": "",
+    "status": "",
+    "answers": [
+      {
+        "id": "",
+        "message": "",
+        "date": "",
+        "authorId": "",
+        "topicId": "",
+        "isSolver": "",
+        "solver": ""
+      }
+    ]
+  }
+}

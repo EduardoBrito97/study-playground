@@ -1,0 +1,20 @@
+meta {
+  name: updateUser
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/user/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "name": "",
+    "username": "",
+    "password": ""
+  }
+}

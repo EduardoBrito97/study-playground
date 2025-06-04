@@ -1,0 +1,19 @@
+meta {
+  name: updateCourse
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/course/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "name": "",
+    "category": ""
+  }
+}

@@ -1,0 +1,20 @@
+meta {
+  name: createUser
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/user/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "name": "",
+    "username": "",
+    "password": ""
+  }
+}

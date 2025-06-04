@@ -1,0 +1,23 @@
+meta {
+  name: updateAnswer
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{baseUrl}}/answer/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "message": "",
+    "date": "",
+    "authorId": "",
+    "topicId": "",
+    "isSolver": "",
+    "solver": ""
+  }
+}

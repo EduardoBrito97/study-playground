@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "KotlinSpringBoot",
+  "name": "KotlinSprintBoot",
   "type": "collection",
   "ignore": [
     "node_modules",

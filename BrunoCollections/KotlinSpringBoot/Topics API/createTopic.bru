@@ -1,0 +1,34 @@
+meta {
+  name: createTopic
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/topic/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "title": "",
+    "message": "",
+    "date": "",
+    "courseId": "",
+    "authorId": "",
+    "status": "",
+    "answers": [
+      {
+        "id": "",
+        "message": "",
+        "date": "",
+        "authorId": "",
+        "topicId": "",
+        "isSolver": "",
+        "solver": ""
+      }
+    ]
+  }
+}

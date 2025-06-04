@@ -1,0 +1,15 @@
+meta {
+  name: deleteCourse
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/course/delete/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}

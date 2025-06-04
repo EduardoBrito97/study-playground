@@ -1,0 +1,19 @@
+meta {
+  name: createCourse
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/course/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "name": "",
+    "category": ""
+  }
+}

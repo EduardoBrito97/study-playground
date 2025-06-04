@@ -1,0 +1,23 @@
+meta {
+  name: createAnswer
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/answer/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "",
+    "message": "",
+    "date": "",
+    "authorId": "",
+    "topicId": "",
+    "isSolver": "",
+    "solver": ""
+  }
+}
