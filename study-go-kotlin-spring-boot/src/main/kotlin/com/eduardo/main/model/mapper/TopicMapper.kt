@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component
 class TopicMapper(
     private val courseService: CourseService,
     private val userService: UserService,
-    private val answerMapper: AnswerMapper
+//    private val answerMapper: AnswerMapper
 ) : Mapper<Topic, TopicDto, TopicForm, TopicView> {
+
+    // @TODO - find a way to map answers correctly
     override fun dtoToModel(dto: TopicDto) = Topic(
         id = dto.id,
         title = dto.title,
@@ -22,9 +24,10 @@ class TopicMapper(
         course = courseService.fetchCourseDatabase(dto.courseId)!!,
         author = userService.fetchUserDatabase(dto.authorId)!!,
         status = dto.status,
-        answers = dto.answers.map { answer -> answerMapper.dtoToModel(answer) }
+//        answers = dto.answers.map { answer -> answerMapper.dtoToModel(answer) }
     )
 
+    // @TODO - find a way to map answers correctly
     override fun modelToDto(model: Topic) = TopicDto(
         id = model.id,
         title = model.title,
@@ -33,9 +36,10 @@ class TopicMapper(
         courseId = model.course.id!!,
         authorId = model.author.id!!,
         status = model.status,
-        answers = model.answers.map { answer -> answerMapper.modelToDto(answer) }
+//        answers = model.answers.map { answer -> answerMapper.modelToDto(answer) }
     )
 
+    // @TODO - find a way to map answers correctly
     override fun formToModel(form: TopicForm) = Topic(
         id = form.id,
         title = form.title,
@@ -44,7 +48,7 @@ class TopicMapper(
         course = courseService.fetchCourseDatabase(form.courseId),
         author = userService.fetchUserDatabase(form.authorId),
         status = form.status,
-        answers = form.answers.map { answer -> answerMapper.formToModel(answer) }
+//        answers = form.answers.map { answer -> answerMapper.formToModel(answer) }
     )
 
     // @TODO - find a way to map answers correctly
@@ -55,6 +59,6 @@ class TopicMapper(
         date = model.date,
         course =  courseService.fetchCourse(model.course.id!!)!!,
         author = userService.fetchUser(model.author.id!!)!!,
-        answers = model.answers.map { answerMapper.modelToView(it) }
+//        answers = model.answers.map { answerMapper.modelToView(it) }
     )
 }
