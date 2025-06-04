@@ -3,11 +3,13 @@ package com.eduardo.main.controllers
 import com.eduardo.main.model.form.AnswerForm
 import com.eduardo.main.service.AnswerService
 import com.eduardo.main.view.AnswerView
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/answer")
+@Tag(name =  "Answers API", description = "Endpoints for managing answers")
 class AnswerController(
     private val answerService: AnswerService
 ) {
@@ -19,10 +21,10 @@ class AnswerController(
     fun updateAnswer(@RequestBody @Valid answer: AnswerForm) = answerService.updateAnswer(answer)
 
     @DeleteMapping("/delete/{id}")
-    fun deleteUser(@PathVariable id: Long) = answerService.deleteAnswer(id)
+    fun deleteAnswer(@PathVariable id: Long) = answerService.deleteAnswer(id)
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable id: Long) = answerService.fetchAnswer(id)
+    fun getAnswer(@PathVariable id: Long) = answerService.fetchAnswer(id)
 
     @GetMapping("/list")
     fun listAnswers(): List<AnswerView> = answerService.fetchAllAnswers()
