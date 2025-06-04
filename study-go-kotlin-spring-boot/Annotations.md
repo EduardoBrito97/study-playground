@@ -1,4 +1,4 @@
-Entities cannot be ````data class```` in kotlin -- it must use open vars instead.
+Although it is possible to use ```data class``` in Kotlin to define entities, it is not recommended to do so. Check the reasons on https://martinsjavacode.medium.com/por-que-n%C3%A3o-usar-data-class-como-entidades-jpa-e-evitar-dor-de-cabe%C3%A7a-9123dd4f9486.
 
 In order for Spring Boot to be able to inject different beans, services or repositories, it must be able to "visualize it". To do so, its necessary for the package to be children of the package containing the @SpringBootApplication annotation.
 
@@ -25,3 +25,14 @@ To initialize the project, you can use https://start.spring.io/ and select the d
 - Validation
   - Includes the spring-boot-starter-validation dependency that helps with API validation.
   - For javax.validation on kotlin, we need to prepend the annotations with ```field:```, since it expects to be added to the getter methods, and Kotlin abstracts it
+- PostgreSQL Driver
+  - Allows us to connect to PostgreSQL databases. Actually, you should look up for the driver you need on your own database. In my case, I was using PostgreSQL.
+- Flyway Migration
+  - Known framework for migrations.
+
+---
+**NOTES**
+
+When using Intellij, you can use the JPABuddy tool to autogenerate migrations for flyway. 
+
+---
