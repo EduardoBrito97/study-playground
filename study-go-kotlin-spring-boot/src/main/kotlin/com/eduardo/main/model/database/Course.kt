@@ -1,16 +1,11 @@
 package com.eduardo.main.model.database
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.io.Serializable
 
 @Entity
 @Table(name = "courses")
-data class Course(
+class Course(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -20,4 +15,14 @@ data class Course(
 
     @Column(nullable = false)
     val category: String
-) : Serializable
+) : Serializable {
+    constructor() : this(name = "", category = "")
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Course) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int = id?.hashCode() ?: 0
+}

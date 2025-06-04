@@ -1,6 +1,7 @@
 package com.eduardo.main.model.database
 
 import jakarta.persistence.Column
+import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
@@ -13,7 +14,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "topics")
-data class Topic(
+class Topic(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -38,8 +39,19 @@ data class Topic(
     val status: TopicStatus = TopicStatus.UNANSWERED,
 
     @Column(nullable = false)
+    @ElementCollection(targetClass = Answer::class)
     val answers: List<Answer> = ArrayList(),
-) : Serializable
+) : Serializable {
+    constructor() : this(title = "", message = "", course = Course(), author = User())
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Topic) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int = id?.hashCode() ?: 0
+}
 
 enum class TopicStatus {
     UNANSWERED,

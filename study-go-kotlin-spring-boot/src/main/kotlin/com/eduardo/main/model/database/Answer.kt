@@ -1,20 +1,12 @@
 package com.eduardo.main.model.database
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.NamedQuery
-import jakarta.persistence.Table
+import jakarta.persistence.*
 import java.io.Serializable
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "answers")
-data class Answer(
+class Answer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -35,4 +27,14 @@ data class Answer(
 
     @Column(nullable = false)
     val isSolver: Boolean,
-) : Serializable
+) : Serializable {
+    constructor() : this(message = "", author = User(), topic = Topic(), isSolver = false)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Answer) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int = id?.hashCode() ?: 0
+}
