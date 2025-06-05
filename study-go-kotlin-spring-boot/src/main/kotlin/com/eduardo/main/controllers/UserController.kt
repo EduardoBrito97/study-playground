@@ -2,9 +2,13 @@ package com.eduardo.main.controllers
 
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.service.UserService
+import com.eduardo.main.view.UserView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/user")
@@ -14,12 +18,19 @@ class UserController(
 ) {
 
     @PostMapping("/create")
-    fun createUser(@RequestBody @Valid user: UserForm) = userService.createUser(user)
+    fun createUser(
+        @RequestBody @Valid user: UserForm,
+        uriBuilder: UriComponentsBuilder) : ResponseEntity<UserView?> {
+        val userView = userService.createUser(user)
+        val uri = uriBuilder.path("/user/${userView.id}").build().toUri()
+        return ResponseEntity.created(uri).body(userView)
+    }
 
     @PutMapping("/update")
     fun updateUser(@RequestBody @Valid user: UserForm) = userService.updateUser(user)
 
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
 
     @GetMapping("/{id}")
