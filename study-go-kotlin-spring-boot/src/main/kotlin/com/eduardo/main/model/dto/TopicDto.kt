@@ -1,6 +1,6 @@
 package com.eduardo.main.model.dto
 
-import com.eduardo.main.model.database.TopicStatus
+import com.eduardo.main.model.enums.TopicStatus
 import java.time.LocalDateTime
 
 

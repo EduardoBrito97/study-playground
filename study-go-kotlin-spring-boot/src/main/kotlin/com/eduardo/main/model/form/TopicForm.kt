@@ -1,6 +1,6 @@
 package com.eduardo.main.model.form
 
-import com.eduardo.main.model.database.TopicStatus
+import com.eduardo.main.model.enums.TopicStatus
 import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.Size
 import java.time.LocalDateTime

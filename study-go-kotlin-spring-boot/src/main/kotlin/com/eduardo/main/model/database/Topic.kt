@@ -1,5 +1,6 @@
 package com.eduardo.main.model.database
 
+import com.eduardo.main.model.enums.TopicStatus
 import jakarta.persistence.Column
 import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
@@ -8,6 +9,8 @@ import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
+import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -28,18 +31,18 @@ class Topic(
     @Column(nullable = false)
     val date: LocalDateTime = LocalDateTime.now(),
 
-    @Column(nullable = false)
+    @ManyToOne
     val course: Course,
 
-    @Column(nullable = false)
+    @ManyToOne
     val author: User,
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     val status: TopicStatus = TopicStatus.UNANSWERED,
 
-    @Column(nullable = false)
     @ElementCollection(targetClass = Answer::class)
+    @OneToMany(mappedBy = "topic")
     val answers: List<Answer> = ArrayList(),
 ) : Serializable {
     constructor() : this(title = "", message = "", course = Course(), author = User())
@@ -51,10 +54,4 @@ class Topic(
     }
 
     override fun hashCode(): Int = id?.hashCode() ?: 0
-}
-
-enum class TopicStatus {
-    UNANSWERED,
-    NOT_SOLVED,
-    CLOSED
 }
