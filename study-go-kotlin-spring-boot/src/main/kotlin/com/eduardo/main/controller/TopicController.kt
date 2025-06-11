@@ -1,8 +1,9 @@
-package com.eduardo.main.controllers
+package com.eduardo.main.controller
 
+import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.TopicForm
 import com.eduardo.main.service.TopicService
-import com.eduardo.main.view.TopicView
+import com.eduardo.main.model.view.TopicView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -31,10 +32,18 @@ class TopicController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteTopic(@PathVariable id: Long) = topicService.deleteTopic(id)
+    fun deleteTopic(@PathVariable id: Long) = {
+        if (topicService.fetchTopic(id) == null) {
+            throw NotFoundException("topic", id)
+        }
+        topicService.deleteTopic(id)
+    }
 
     @GetMapping("/{id}")
-    fun getTopic(@PathVariable id: Long) = topicService.fetchTopic(id)
+    fun getTopic(@PathVariable id: Long) : TopicView {
+        val topic = topicService.fetchTopic(id)
+        return topic ?: throw NotFoundException("topic", id)
+    }
 
     @GetMapping("/list")
     fun listTopics() = topicService.fetchAllTopics()

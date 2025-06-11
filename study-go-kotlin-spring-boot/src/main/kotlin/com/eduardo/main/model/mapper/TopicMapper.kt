@@ -5,7 +5,7 @@ import com.eduardo.main.model.form.TopicForm
 import com.eduardo.main.model.database.Topic
 import com.eduardo.main.service.CourseService
 import com.eduardo.main.service.UserService
-import com.eduardo.main.view.TopicView
+import com.eduardo.main.model.view.TopicView
 import org.springframework.stereotype.Component
 
 @Component
@@ -21,8 +21,8 @@ class TopicMapper(
         title = dto.title,
         message = dto.message,
         date = dto.date,
-        course = courseService.fetchCourseDatabase(dto.courseId)!!,
-        author = userService.fetchUserDatabase(dto.authorId)!!,
+        course = courseService.fetchCourseDatabase(dto.courseId),
+        author = userService.fetchUserDatabase(dto.authorId),
         status = dto.status,
 //        answers = dto.answers.map { answer -> answerMapper.dtoToModel(answer) }
     )

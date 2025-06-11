@@ -1,4 +1,4 @@
-package com.eduardo.main.view
+package com.eduardo.main.model.view
 
 data class CourseView(
     var id: Long? = null,

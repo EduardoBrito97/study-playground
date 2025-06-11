@@ -1,8 +1,9 @@
-package com.eduardo.main.controllers
+package com.eduardo.main.controller
 
+import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.CourseForm
 import com.eduardo.main.service.CourseService
-import com.eduardo.main.view.CourseView
+import com.eduardo.main.model.view.CourseView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -31,10 +32,18 @@ class CourseController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCourse(@PathVariable id: Long) = courseService.deleteCourse(id)
+    fun deleteCourse(@PathVariable id: Long) = {
+        if (courseService.fetchCourse(id) == null) {
+            throw NotFoundException("course", id)
+        }
+        courseService.deleteCourse(id)
+    }
 
     @GetMapping("/{id}")
-    fun getCourse(@PathVariable id: Long) = courseService.fetchCourse(id)
+    fun getCourse(@PathVariable id: Long) :CourseView {
+        val course = courseService.fetchCourse(id)
+        return course ?: throw NotFoundException("course", id)
+    }
 
     @GetMapping("/list")
     fun listCourses() = courseService.fetchAllCourses()

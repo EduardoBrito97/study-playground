@@ -1,8 +1,9 @@
-package com.eduardo.main.controllers
+package com.eduardo.main.controller
 
+import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.service.UserService
-import com.eduardo.main.view.UserView
+import com.eduardo.main.model.view.UserView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -31,10 +32,18 @@ class UserController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
+    fun deleteUser(@PathVariable id: Long) {
+        if (userService.fetchUser(id) == null) {
+            throw NotFoundException("user", id)
+        }
+        userService.deleteUser(id)
+    }
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable id: Long) = userService.fetchUser(id)
+    fun getUser(@PathVariable id: Long) : UserView {
+        val user = userService.fetchUser(id)
+        return user ?: throw NotFoundException("user", id)
+    }
 
     @GetMapping("/list")
     fun listUsers() = userService.fetchAllUsers()

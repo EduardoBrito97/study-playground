@@ -1,4 +1,4 @@
-package com.eduardo.main.view
+package com.eduardo.main.model.view
 
 import java.time.LocalDateTime
 

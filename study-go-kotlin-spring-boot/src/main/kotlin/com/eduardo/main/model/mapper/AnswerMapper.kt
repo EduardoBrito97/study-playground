@@ -5,7 +5,7 @@ import com.eduardo.main.model.form.AnswerForm
 import com.eduardo.main.model.database.Answer
 import com.eduardo.main.service.TopicService
 import com.eduardo.main.service.UserService
-import com.eduardo.main.view.AnswerView
+import com.eduardo.main.model.view.AnswerView
 import org.springframework.stereotype.Component
 
 @Component
@@ -19,8 +19,8 @@ class AnswerMapper(
         id = dto.id,
         message = dto.message,
         date = dto.date,
-        author = userService.fetchUserDatabase(dto.authorId)!!,
-        topic = topicService.fetchTopicDatabase(dto.topicId)!!,
+        author = userService.fetchUserDatabase(dto.authorId),
+        topic = topicService.fetchTopicDatabase(dto.topicId),
         isSolver = dto.isSolver
     )
 

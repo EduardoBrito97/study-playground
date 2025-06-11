@@ -3,7 +3,7 @@ package com.eduardo.main.model.mapper
 import com.eduardo.main.model.dto.UserDto
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.model.database.User
-import com.eduardo.main.view.UserView
+import com.eduardo.main.model.view.UserView
 import org.springframework.stereotype.Component
 
 @Component

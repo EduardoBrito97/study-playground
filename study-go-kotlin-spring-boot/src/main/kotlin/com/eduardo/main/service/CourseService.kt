@@ -1,9 +1,11 @@
 package com.eduardo.main.service
 
+import com.eduardo.main.exception.NotFoundException
+import com.eduardo.main.model.database.Course
 import com.eduardo.main.model.form.CourseForm
 import com.eduardo.main.model.mapper.CourseMapper
 import com.eduardo.main.repository.CourseRepository
-import com.eduardo.main.view.CourseView
+import com.eduardo.main.model.view.CourseView
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -41,7 +43,7 @@ class CourseService(
         }
     }
 
-    fun fetchCourseDatabase(id: Long) = courseRepository.findById(id).orElse(null)
+    fun fetchCourseDatabase(id: Long): Course = courseRepository.findById(id).orElseThrow { NotFoundException("course", id) }
 
     fun fetchAllCourses(): List<CourseView> {
         return courseRepository.findAll().map { courseMapper.modelToView(it) }

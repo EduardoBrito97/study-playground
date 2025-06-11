@@ -1,9 +1,11 @@
 package com.eduardo.main.service
 
+import com.eduardo.main.exception.NotFoundException
+import com.eduardo.main.model.database.User
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.model.mapper.UserMapper
 import com.eduardo.main.repository.UserRepository
-import com.eduardo.main.view.UserView
+import com.eduardo.main.model.view.UserView
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -41,7 +43,7 @@ class UserService(
         }
     }
 
-    fun fetchUserDatabase(id: Long) = userRepository.findById(id).orElse(null)
+    fun fetchUserDatabase(id: Long): User = userRepository.findById(id).orElseThrow { NotFoundException("user", id) }
 
     fun fetchAllUsers(): List<UserView> {
         return userRepository.findAll().map { userMapper.modelToView(it) }

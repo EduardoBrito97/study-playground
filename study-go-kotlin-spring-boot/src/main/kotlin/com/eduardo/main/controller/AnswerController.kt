@@ -1,8 +1,9 @@
-package com.eduardo.main.controllers
+package com.eduardo.main.controller
 
+import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.AnswerForm
 import com.eduardo.main.service.AnswerService
-import com.eduardo.main.view.AnswerView
+import com.eduardo.main.model.view.AnswerView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -31,10 +32,18 @@ class AnswerController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteAnswer(@PathVariable id: Long) = answerService.deleteAnswer(id)
+    fun deleteAnswer(@PathVariable id: Long) {
+        if (answerService.fetchAnswer(id) == null) {
+            throw NotFoundException("answer", id)
+        }
+        answerService.deleteAnswer(id)
+    }
 
     @GetMapping("/{id}")
-    fun getAnswer(@PathVariable id: Long) = answerService.fetchAnswer(id)
+    fun getAnswer(@PathVariable id: Long) : AnswerView {
+        val answer = answerService.fetchAnswer(id)
+        return answer ?: throw NotFoundException("answer", id)
+    }
 
     @GetMapping("/list")
     fun listAnswers(): List<AnswerView> = answerService.fetchAllAnswers()

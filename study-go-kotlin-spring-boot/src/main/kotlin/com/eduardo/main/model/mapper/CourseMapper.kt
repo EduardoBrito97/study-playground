@@ -3,7 +3,7 @@ package com.eduardo.main.model.mapper
 import com.eduardo.main.model.dto.CourseDto
 import com.eduardo.main.model.form.CourseForm
 import com.eduardo.main.model.database.Course
-import com.eduardo.main.view.CourseView
+import com.eduardo.main.model.view.CourseView
 import org.springframework.stereotype.Component
 
 @Component

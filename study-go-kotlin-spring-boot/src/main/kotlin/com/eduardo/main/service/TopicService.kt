@@ -1,9 +1,11 @@
 package com.eduardo.main.service
 
+import com.eduardo.main.exception.NotFoundException
+import com.eduardo.main.model.database.Topic
 import com.eduardo.main.model.form.TopicForm
 import com.eduardo.main.model.mapper.TopicMapper
 import com.eduardo.main.repository.TopicRepository
-import com.eduardo.main.view.TopicView
+import com.eduardo.main.model.view.TopicView
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -41,7 +43,7 @@ class TopicService(
         }
     }
 
-    fun fetchTopicDatabase(id: Long) = topicRepository.findById(id).orElse(null)
+    fun fetchTopicDatabase(id: Long): Topic = topicRepository.findById(id).orElseThrow { NotFoundException("topic", id) }
 
     fun fetchAllTopics(): List<TopicView> {
         return topicRepository.findAll().map { topicMapper.modelToView(it) }
