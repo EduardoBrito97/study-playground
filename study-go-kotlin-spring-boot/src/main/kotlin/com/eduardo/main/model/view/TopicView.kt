@@ -8,7 +8,7 @@ data class TopicView(
     var title: String,
     var message: String,
     var date: LocalDateTime = LocalDateTime.now(),
-    var course: CourseView,
-    var author: UserView,
-    var answers: List<AnswerView> = ArrayList(),
+    var courseId: Long,
+    var authorId: Long,
+    var answersIds: List<Long>
 )

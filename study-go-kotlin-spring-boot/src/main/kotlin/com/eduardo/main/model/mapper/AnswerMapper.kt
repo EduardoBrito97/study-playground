@@ -1,18 +1,17 @@
 package com.eduardo.main.model.mapper
 
+import com.eduardo.main.model.database.Answer
 import com.eduardo.main.model.dto.AnswerDto
 import com.eduardo.main.model.form.AnswerForm
-import com.eduardo.main.model.database.Answer
+import com.eduardo.main.model.view.AnswerView
 import com.eduardo.main.service.TopicService
 import com.eduardo.main.service.UserService
-import com.eduardo.main.model.view.AnswerView
 import org.springframework.stereotype.Component
 
 @Component
 class AnswerMapper(
     private val userService: UserService,
     private val topicService: TopicService,
-    private val topicMapper: TopicMapper
 ) : Mapper<Answer, AnswerDto, AnswerForm, AnswerView> {
 
     override fun dtoToModel(dto: AnswerDto) = Answer(
@@ -46,7 +45,7 @@ class AnswerMapper(
         id = model.id,
         message = model.message,
         date = model.date,
-        authorView = userService.fetchUser(model.author.id!!)!!,
-        topicView = topicMapper.modelToView(model.topic),
+        authorId = model.author.id!!,
+        topicId = model.topic.id!!
     )
 }
