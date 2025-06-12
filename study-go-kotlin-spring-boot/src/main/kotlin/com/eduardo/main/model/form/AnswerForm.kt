@@ -1,13 +1,14 @@
 package com.eduardo.main.model.form
 
 import jakarta.validation.constraints.NotEmpty
+import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
 
 data class AnswerForm(
     var id: Long? = null,
     @field:NotEmpty var message: String,
-    @field:NotEmpty var date: LocalDateTime = LocalDateTime.now(),
-    @field:NotEmpty var authorId: Long,
-    @field:NotEmpty var topicId: Long,
-    @field:NotEmpty var isSolver: Boolean,
+    var date: LocalDateTime = LocalDateTime.now(),
+    @field:NotNull var authorId: Long,
+    @field:NotNull var topicId: Long,
+    @field:NotNull var isSolver: Boolean,
 )
