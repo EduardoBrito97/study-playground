@@ -32,7 +32,7 @@ class CourseController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCourse(@PathVariable id: Long) = {
+    fun deleteCourse(@PathVariable id: Long) {
         if (courseService.fetchCourse(id) == null) {
             throw NotFoundException("course", id)
         }

@@ -32,7 +32,7 @@ class TopicController(
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteTopic(@PathVariable id: Long) = {
+    fun deleteTopic(@PathVariable id: Long) {
         if (topicService.fetchTopic(id) == null) {
             throw NotFoundException("topic", id)
         }
