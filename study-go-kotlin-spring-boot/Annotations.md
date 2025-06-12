@@ -30,6 +30,11 @@ To initialize the project, you can use https://start.spring.io/ and select the d
 - Flyway Migration
   - Known framework for migrations.
 
+Another useful information:
+- If you're using H2 database, you can set up a ```data.sql``` file that it will run everytime the system starts;
+- Spring supports both ```application.properties``` and ```application.yml```. Yaml files are more readable, thus more used.
+- ```springdoc-openapi-starter-webmvc-ui``` does not support returning functions -- so make sure all your endpoints are not ```= {}``` instead of just ```{}```
+
 ---
 **NOTES**
 

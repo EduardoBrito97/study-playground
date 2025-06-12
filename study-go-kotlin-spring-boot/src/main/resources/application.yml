@@ -21,8 +21,12 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
     hibernate:
-      # Tell Hibernate to generate DDL scripts but NOT apply them to the database
-      ddl-auto: none
+      hbm2ddl:
+        # Tell Hibernate to generate DDL scripts but NOT apply them to the database
+        ddl-auto: none
+        # For debugging SQL
+        #show_sql: true
+        #format_sql: true
 
     properties:
       javax:
