@@ -46,6 +46,7 @@ class ExceptionHandler {
         exception: Exception,
         request: HttpServletRequest
     ): ErrorView {
+        exception.printStackTrace()
         return ErrorView(
             status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             error = HttpStatus.INTERNAL_SERVER_ERROR.name,
