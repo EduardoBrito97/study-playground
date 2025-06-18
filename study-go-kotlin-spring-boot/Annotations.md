@@ -22,6 +22,9 @@ To initialize the project, you can use https://start.spring.io/ and select the d
   - Helps to reduce Boilerplate code. Kotlin isn't much benefited by it, but it helps with Java.
 - Spring JPA
   - Helps managing database connection.
+- Spring Cache Abstraction
+  - Adds support for caching on a spring app. See [this link for reference](https://www.baeldung.com/spring-cache-tutorial).
+    - Warning: Spring cache uses in-memory caches, which can be quite dangerous for production environments -- meaning this should be attached to some other cache framework to avoid overloading memory (e.g. memcached). 
 - Validation
   - Includes the spring-boot-starter-validation dependency that helps with API validation.
   - For javax.validation on kotlin, we need to prepend the annotations with ```field:```, since it expects to be added to the getter methods, and Kotlin abstracts it
