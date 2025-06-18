@@ -7,6 +7,8 @@ import com.eduardo.main.model.mapper.AnswerMapper
 import com.eduardo.main.repository.AnswerRepository
 import com.eduardo.main.model.view.AnswerView
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -45,9 +47,9 @@ class AnswerService(
 
     fun fetchAnswerDatabase(id: Long) = answerRepository.findById(id).orElseThrow { NotFoundException("answer", id) }
 
-    fun fetchAllAnswers(): List<AnswerView> {
-        return answerRepository.findAll().map { answerMapper.modelToView(it) }
-    }
+    fun fetchAllAnswers(
+        pageable: Pageable
+    ) = answerRepository.findAll(pageable).map { answerMapper.modelToView(it) }
 
     fun fetchAnswerFromTopic(topicId: Long?): List<AnswerView> {
         return if (topicId == null) {

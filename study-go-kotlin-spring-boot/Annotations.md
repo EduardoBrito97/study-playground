@@ -34,6 +34,8 @@ Another useful information:
 - If you're using H2 database, you can set up a ```data.sql``` file that it will run everytime the system starts;
 - Spring supports both ```application.properties``` and ```application.yml```. Yaml files are more readable, thus more used.
 - ```springdoc-openapi-starter-webmvc-ui``` does not support returning functions -- so make sure all your endpoints are not ```= {}``` instead of just ```{}```
+- The Spring's JpaRepository can generate custom methods without even annotations by using findByPathToMethod which receives a specific param -- but you can also use the @Query (see AnswerRepository).
+- Spring deals with pagination automatically via pageable.
 
 ---
 **NOTES**

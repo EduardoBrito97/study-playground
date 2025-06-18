@@ -7,6 +7,7 @@ import com.eduardo.main.model.mapper.CourseMapper
 import com.eduardo.main.repository.CourseRepository
 import com.eduardo.main.model.view.CourseView
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -43,9 +44,12 @@ class CourseService(
         }
     }
 
-    fun fetchCourseDatabase(id: Long): Course = courseRepository.findById(id).orElseThrow { NotFoundException("course", id) }
+    fun fetchCourseDatabase(id: Long): Course =
+        courseRepository.findById(id).orElseThrow { NotFoundException("course", id) }
 
-    fun fetchAllCourses(): List<CourseView> {
-        return courseRepository.findAll().map { courseMapper.modelToView(it) }
+    fun fetchAllCourses(
+        pageable: Pageable
+    ) = courseRepository.findAll(pageable).map {
+        courseMapper.modelToView(it)
     }
 }

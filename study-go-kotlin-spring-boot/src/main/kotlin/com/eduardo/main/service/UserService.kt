@@ -7,6 +7,7 @@ import com.eduardo.main.model.mapper.UserMapper
 import com.eduardo.main.repository.UserRepository
 import com.eduardo.main.model.view.UserView
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -23,7 +24,7 @@ class UserService(
     }
 
     @Transactional
-    fun updateUser(userForm: UserForm) : UserView {
+    fun updateUser(userForm: UserForm): UserView {
         val user = userMapper.formToModel(userForm)
         userRepository.save(user)
         return userMapper.modelToView(user)
@@ -45,7 +46,7 @@ class UserService(
 
     fun fetchUserDatabase(id: Long): User = userRepository.findById(id).orElseThrow { NotFoundException("user", id) }
 
-    fun fetchAllUsers(): List<UserView> {
-        return userRepository.findAll().map { userMapper.modelToView(it) }
-    }
+    fun fetchAllUsers(
+        pageable: Pageable
+    ) = userRepository.findAll(pageable).map { userMapper.modelToView(it) }
 }

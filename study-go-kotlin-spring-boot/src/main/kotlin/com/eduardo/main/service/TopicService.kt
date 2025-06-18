@@ -7,6 +7,7 @@ import com.eduardo.main.model.mapper.TopicMapper
 import com.eduardo.main.repository.TopicRepository
 import com.eduardo.main.model.view.TopicView
 import jakarta.transaction.Transactional
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -43,9 +44,12 @@ class TopicService(
         }
     }
 
-    fun fetchTopicDatabase(id: Long): Topic = topicRepository.findById(id).orElseThrow { NotFoundException("topic", id) }
+    fun fetchTopicDatabase(id: Long): Topic =
+        topicRepository.findById(id).orElseThrow { NotFoundException("topic", id) }
 
-    fun fetchAllTopics(): List<TopicView> {
-        return topicRepository.findAll().map { topicMapper.modelToView(it) }
+    fun fetchAllTopics(
+        pageable: Pageable
+    ) = topicRepository.findAll(pageable).map {
+        topicMapper.modelToView(it)
     }
 }

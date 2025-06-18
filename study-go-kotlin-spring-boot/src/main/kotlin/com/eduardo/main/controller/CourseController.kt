@@ -6,6 +6,7 @@ import com.eduardo.main.service.CourseService
 import com.eduardo.main.model.view.CourseView
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -46,5 +47,7 @@ class CourseController(
     }
 
     @GetMapping("/list")
-    fun listCourses() = courseService.fetchAllCourses()
+    fun listCourses(
+        pageable: Pageable
+    ) = courseService.fetchAllCourses(pageable)
 }
