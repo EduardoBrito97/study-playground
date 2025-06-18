@@ -4,10 +4,9 @@ import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.database.Answer
 import com.eduardo.main.model.form.AnswerForm
 import com.eduardo.main.model.mapper.AnswerMapper
-import com.eduardo.main.repository.AnswerRepository
 import com.eduardo.main.model.view.AnswerView
+import com.eduardo.main.repository.AnswerRepository
 import jakarta.transaction.Transactional
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
