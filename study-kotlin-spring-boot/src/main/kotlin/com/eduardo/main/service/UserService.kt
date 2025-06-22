@@ -2,19 +2,22 @@ package com.eduardo.main.service
 
 import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.database.User
+import com.eduardo.main.model.dto.UserDetail
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.model.mapper.UserMapper
 import com.eduardo.main.repository.UserRepository
 import com.eduardo.main.model.view.UserView
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Pageable
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
     private val userRepository: UserRepository,
     val userMapper: UserMapper
-) {
+) : UserDetailsService {
 
     @Transactional
     fun createUser(userForm: UserForm): UserView {
@@ -49,4 +52,9 @@ class UserService(
     fun fetchAllUsers(
         pageable: Pageable
     ) = userRepository.findAll(pageable).map { userMapper.modelToView(it) }
+
+    override fun loadUserByUsername(username: String?): UserDetails? {
+        val user = userRepository.findByUsername(username)
+        return UserDetail(user)
+    }
 }

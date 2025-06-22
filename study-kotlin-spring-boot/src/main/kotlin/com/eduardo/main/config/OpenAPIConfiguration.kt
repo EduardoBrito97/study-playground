@@ -1,4 +1,4 @@
-package com.eduardo.main.openapi
+package com.eduardo.main.config
 
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Contact
