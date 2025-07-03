@@ -1,5 +1,6 @@
 package com.eduardo.main.model.database
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.io.Serializable
 
@@ -17,7 +18,12 @@ class User (
     var username: String = "",
 
     @Column(nullable = false)
-    var password: String = ""
+    var password: String = "",
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role::class)
+    @JoinTable(name = "users_roles", joinColumns = [JoinColumn(name = "user_id")], inverseJoinColumns = [JoinColumn(name = "role_id")])
+    var roles: List<Role> = mutableListOf()
 ) : Serializable {
     constructor() : this(name = "", username = "", password = "")
 
