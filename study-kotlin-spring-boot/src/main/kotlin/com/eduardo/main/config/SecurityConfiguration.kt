@@ -7,10 +7,11 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.config.core.GrantedAuthorityDefaults
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.util.matcher.RegexRequestMatcher
 
 
 @Configuration
@@ -18,6 +19,10 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfiguration (
     private val userService: UserService
 ){
+    @Bean
+    // Removing the ROLE_ prefix from all roles
+    fun grantedAuthorityDefaults(): GrantedAuthorityDefaults = GrantedAuthorityDefaults("")
+
     @Bean
     fun passwordEncoder() = BCryptPasswordEncoder()
 
@@ -32,22 +37,26 @@ class SecurityConfiguration (
 
     @Bean
     fun filterChain(http: HttpSecurity) : SecurityFilterChain {
-        http.invoke {
-            // Setting all requests to require authentication
-            authorizeHttpRequests {
-                authorize(anyRequest, authenticated)
+        http
+            // turns off CSRF protection by removing the CsrfFilter from the security filter chain. Useful for stateless applications
+            .csrf { it.disable() }
+            .authorizeHttpRequests {
+                // Managing authorization via request path
+                it
+                    .requestMatchers(
+                        RegexRequestMatcher.regexMatcher(".*\\/create.*"),
+                        RegexRequestMatcher.regexMatcher(".*\\/edit.*"),
+                        RegexRequestMatcher.regexMatcher(".*\\/delete.*"))
+                        .hasRole("write")
+                    .anyRequest().authenticated()
             }
-            // Saying our app should not keep any auth info
-            sessionManagement {
-                SessionCreationPolicy.STATELESS
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            // We're allowing only http auth
-            formLogin {
-                disable()
+            .formLogin {
+                it.disable()
             }
-            // Allowing basic auth
-            httpBasic {}
-        }
+            .httpBasic { }
         return http.orBuild
     }
 
