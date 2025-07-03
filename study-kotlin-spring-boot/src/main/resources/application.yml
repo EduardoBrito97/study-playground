@@ -20,13 +20,14 @@ spring:
     # Specify the database dialect explicitly (recommended)
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
+    # For debugging SQL
+#    show-sql: true
+#    format_sql: true
+
     hibernate:
       hbm2ddl:
         # Tell Hibernate to generate DDL scripts but NOT apply them to the database
         ddl-auto: none
-        # For debugging SQL
-        #show_sql: true
-        #format_sql: true
 
     properties:
       javax:
