@@ -27,6 +27,7 @@ To initialize the project, you can use https://start.spring.io/ and select the d
     - Warning: Spring cache uses in-memory caches, which can be quite dangerous for production environments -- meaning this should be attached to some other cache framework to avoid overloading memory (e.g. memcached). 
 - Spring Security
   - Helps with all the security part of your application. It adds automatically the security layer, only by adding it to the pom.xml.
+  - Basic auth is (obviously) not safe enough. We should use [JWT](https://jwt.io) instead. We need the JWT dependency for that.
 - Validation
   - Includes the spring-boot-starter-validation dependency that helps with API validation.
   - For javax.validation on kotlin, we need to prepend the annotations with ```field:```, since it expects to be added to the getter methods, and Kotlin abstracts it

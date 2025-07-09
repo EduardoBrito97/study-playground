@@ -41,6 +41,9 @@ spring:
               # Optional: generate drop script as well
               drop-target: src/main/resources/drop-schema.sql
 
+jwt:
+  secret: secreto
+
 # Hikari debugging settings
 #logging.level.com.zaxxer.hikari.HikariConfig=DEBUG
 #logging.level.com.zaxxer.hikari=TRACE
