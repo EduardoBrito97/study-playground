@@ -42,7 +42,8 @@ spring:
               drop-target: src/main/resources/drop-schema.sql
 
 jwt:
-  secret: secreto
+  # SHA-256 needs at least 256 bits
+  secret: 220067b0-ddf3-4035-88ef-b0e984aefb9b
 
 # Hikari debugging settings
 #logging.level.com.zaxxer.hikari.HikariConfig=DEBUG
