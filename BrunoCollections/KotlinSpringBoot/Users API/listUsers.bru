@@ -5,7 +5,15 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/user/list
+  url: {{baseUrl}}/user/list?size=1
   body: none
-  auth: none
+  auth: bearer
+}
+
+params:query {
+  size: 1
+}
+
+auth:bearer {
+  token: {{authorizationToken}}
 }

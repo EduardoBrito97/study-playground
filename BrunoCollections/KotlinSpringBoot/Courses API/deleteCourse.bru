@@ -7,9 +7,13 @@ meta {
 delete {
   url: {{baseUrl}}/course/delete/:id
   body: none
-  auth: none
+  auth: bearer
 }
 
 params:path {
   id: 
+}
+
+auth:bearer {
+  token: {{authorizationToken}}
 }

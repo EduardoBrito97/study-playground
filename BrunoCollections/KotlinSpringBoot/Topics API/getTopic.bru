@@ -7,9 +7,13 @@ meta {
 get {
   url: {{baseUrl}}/topic/:id
   body: none
-  auth: none
+  auth: bearer
 }
 
 params:path {
   id: 
+}
+
+auth:bearer {
+  token: {{authorizationToken}}
 }
