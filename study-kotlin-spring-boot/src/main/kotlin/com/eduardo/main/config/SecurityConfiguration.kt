@@ -51,10 +51,10 @@ class SecurityConfiguration (
                         RegexRequestMatcher.regexMatcher(".*\\/create.*"),
                         RegexRequestMatcher.regexMatcher(".*\\/edit.*"),
                         RegexRequestMatcher.regexMatcher(".*\\/delete.*"),
-                        RegexRequestMatcher.regexMatcher(".*\\/list.*"),
+//                        RegexRequestMatcher.regexMatcher(".*\\/list.*"),
 //                            RegexRequestMatcher.regexMatcher(".*\\/login")
                     )
-                    .permitAll()
+                    .hasAuthority("write")
                     .anyRequest().authenticated()
             }
             .addFilterBefore(

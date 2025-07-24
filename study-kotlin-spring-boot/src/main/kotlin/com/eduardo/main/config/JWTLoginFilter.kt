@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.springframework.stereotype.Component
 
 class JWTLoginFilter (
     private val authManager: AuthenticationManager,
@@ -30,9 +29,11 @@ class JWTLoginFilter (
         chain: FilterChain?,
         authResult: Authentication?
     ) {
-        val username = (authResult?.principal as UserDetail).username
-        val password = (authResult.principal as UserDetail).password
-        val token = jwtUtil.generateToken(username, password)
+        val user = authResult?.principal as UserDetail
+        val username = user.username
+        val password = user.password
+
+        val token = jwtUtil.generateToken(username, password, user.authorities)
         response?.addHeader("Authorization", "$token")
     }
 }
