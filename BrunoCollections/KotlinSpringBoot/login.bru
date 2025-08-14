@@ -1,0 +1,22 @@
+meta {
+  name: login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username":"{{login}}",
+    "password":"{{password}}"
+  }
+}
+
+vars:post-response {
+  authorizationToken: res.headers["authorization"];
+}

@@ -5,13 +5,9 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/user/list?size=1
+  url: {{baseUrl}}/user/list
   body: none
   auth: bearer
-}
-
-params:query {
-  size: 1
 }
 
 auth:bearer {
