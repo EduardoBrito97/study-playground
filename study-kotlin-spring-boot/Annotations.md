@@ -1,3 +1,5 @@
+# Kotlin & Co
+
 Although it is possible to use ```data class``` in Kotlin to define entities, it is not recommended to do so. Check the reasons on https://martinsjavacode.medium.com/por-que-n%C3%A3o-usar-data-class-como-entidades-jpa-e-evitar-dor-de-cabe%C3%A7a-9123dd4f9486.
 
 In order for Spring Boot to be able to inject different beans, services or repositories, it must be able to "visualize it". To do so, its necessary for the package to be children of the package containing the @SpringBootApplication annotation.
@@ -51,3 +53,22 @@ When using Intellij, you can use the JPABuddy tool to autogenerate migrations fo
 Although it's not available on Spring Initializr, you can add the ```springdoc-openapi-starter-webmvc-ui``` dependency to your project to have a Swagger UI for your API. It will automatically generate the documentation for your API based on the annotations you use in your code.
 
 ---
+
+# Docker
+
+To check available images on Docker, check [dockerhub.com](https://dockerhub.com).
+
+You have to configure your database to allow TCP/IP connections in order to Docker to work locally. For PostGres:
+- Check whether the pg_hba.conf accepts all localhost IPs;
+
+````
+host    DB_NAME    postgres    192.168.1.0/24    md5
+````
+- Check whether postgresql.conf listens to all IPs;
+- Check whether your database port is free on Windows Firewall.
+
+Commands to build/run Docker
+````
+docker build -t <<appname>> -f Dockerfile .
+docker run -p 3080:8080 <<appname>>
+````
