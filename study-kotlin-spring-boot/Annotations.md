@@ -72,3 +72,9 @@ Commands to build/run Docker
 docker build -t <<appname>> -f Dockerfile .
 docker run -p 3080:8080 <<appname>>
 ````
+
+To check the stats of the Docker containers you may use `docker stats`. 
+
+## Docker compose
+
+Since we want to use the same Dockerfile for all of our deployments, we need to have "profiles" for each env -- one for production and one for local dev, for instance. To do so, we use the `docker-compose.yml`, to customize each deployment.
