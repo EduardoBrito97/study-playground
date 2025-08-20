@@ -1,0 +1,21 @@
+version: '3.8'
+
+x-docker-base: &docker-base
+  build: .
+  ports:
+    - "8080:8080"
+  environment:
+    - JAVA_OPTS=-Xms1g -Xmx3g
+services:
+  dev:
+    <<: *docker-base
+    restart: always
+    environment:
+      - JAVA_OPTS=Xms1g -Xmx3g -Dspring.devtools.restart.enabled=true -Dspring.devtools.livereload.enabled=true -XX:CICompilerCount=2
+      - SPRING_ACTIVE_PROFILE=dev-docker
+
+  prd:
+    <<: *docker-base
+    environment:
+      - JAVA_OPTS=Xms1g -Xmx3g -XX:CICompilerCount=2
+      - SPRING_ACTIVE_PROFILE=prd

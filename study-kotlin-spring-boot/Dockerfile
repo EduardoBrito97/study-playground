@@ -7,20 +7,13 @@ EXPOSE 8080
 
 # Creating the JAR object
 WORKDIR /app
-
 COPY pom.xml .
-
-# Trying to use cache for maven
-#RUN mvn dependency:go-offline
-
-#COPY . .
-
-#COPY src ./src
-
-#RUN mvn clean package -DskipTests
+RUN mvn dependency:resolve
+COPY . .
+RUN mvn clean package -DskipTests
 
 # Moving the JAR object to the image
-ADD /target/study-kotlin-spring-boot*.jar forum.jar
+#ADD /target/study-kotlin-spring-boot*.jar forum.jar
 
 # Execute the JAR object
-ENTRYPOINT ["java", "-jar", "forum.jar", "--spring.profiles.active=dev-docker"]
+ENTRYPOINT ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=$SPRING_ACTIVE_PROFILE", "-Dspring-boot.run.jvmArguments=$JAVA_OPTS"]

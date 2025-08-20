@@ -2,6 +2,11 @@ spring:
   application:
     name: forum-app-dev
 
+  devtools:
+    livereload:
+      enabled:
+        true
+
   datasource:
     url: jdbc:postgresql://localhost:3306/kotlin_studies
     username: postgres
