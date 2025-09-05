@@ -8,10 +8,10 @@ spring:
         true
 
   datasource:
-    url: jdbc:postgresql://192.168.1.12:3306/kotlin_studies
-    username: postgres
-    password: 1234
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:kotlin_studies}?useSSL=false&serverTimezone=UTC
+    username: ${DB_USER:root}
+    password: ${DB_PASS:1234}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Flyway properties
   flyway:
@@ -23,7 +23,7 @@ spring:
     generate-ddl: false
 
     # Specify the database dialect explicitly (recommended)
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
 
     # For debugging SQL
 #    show-sql: true

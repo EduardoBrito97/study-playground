@@ -50,7 +50,7 @@ class JWTUtil (
         val secretKey = Keys.hmacShaKeyFor(key.toByteArray(StandardCharsets.UTF_8))
         val usernameAndPassword =  Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).payload.subject
         val splitIndex = usernameAndPassword.indexOf(":")
-        val username =  usernameAndPassword.substring(0, splitIndex)
+        val username = usernameAndPassword.take(splitIndex)
         val password = usernameAndPassword.substring(splitIndex)
         val user = userService.loadUserByUsername(username)
         return UsernamePasswordAuthenticationToken(username, password, user?.authorities)
