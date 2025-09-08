@@ -22,7 +22,7 @@ class CourseController(
     @PostMapping("/create")
     fun createCourse(
         @RequestBody @Valid course: CourseForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<CourseView?> {
+        uriBuilder: UriComponentsBuilder) : ResponseEntity<CourseView> {
         val courseView = courseService.createCourse(course)
         val uri = uriBuilder.path("/course/${courseView.id}").build().toUri()
         return ResponseEntity.created(uri).body(courseView)

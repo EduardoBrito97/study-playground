@@ -5,8 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>4.0.0-M2</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.eduardo</groupId>
 	<artifactId>study-kotlin-spring-boot</artifactId>
@@ -29,7 +29,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<kotlin.version>2.1.21</kotlin.version>
-		<spring.version>3.5.0</spring.version>
+		<spring.version>4.0.0-M2</spring.version>
 		<jjwt.version>0.12.6</jjwt.version>
 	</properties>
 	<dependencies>

@@ -53,7 +53,7 @@ class UserService(
         pageable: Pageable
     ) = userRepository.findAll(pageable).map { userMapper.modelToView(it) }
 
-    override fun loadUserByUsername(username: String?): UserDetails? {
+    override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username)
         return UserDetail(user)
     }

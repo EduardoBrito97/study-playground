@@ -22,7 +22,7 @@ class UserController(
     @PostMapping("/create")
     fun createUser(
         @RequestBody @Valid user: UserForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<UserView?> {
+        uriBuilder: UriComponentsBuilder) : ResponseEntity<UserView> {
         val userView = userService.createUser(user)
         val uri = uriBuilder.path("/user/${userView.id}").build().toUri()
         return ResponseEntity.created(uri).body(userView)

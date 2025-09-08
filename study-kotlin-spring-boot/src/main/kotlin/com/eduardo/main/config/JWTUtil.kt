@@ -53,6 +53,6 @@ class JWTUtil (
         val username = usernameAndPassword.take(splitIndex)
         val password = usernameAndPassword.substring(splitIndex)
         val user = userService.loadUserByUsername(username)
-        return UsernamePasswordAuthenticationToken(username, password, user?.authorities)
+        return UsernamePasswordAuthenticationToken(username, password, user.authorities)
     }
 }

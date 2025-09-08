@@ -28,5 +28,5 @@ class Role (
 
     override fun hashCode(): Int = id?.hashCode() ?: 0
 
-    override fun getAuthority(): String? = name
+    override fun getAuthority(): String = name
 }

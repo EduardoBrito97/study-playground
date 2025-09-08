@@ -22,7 +22,7 @@ class TopicController(
     @PostMapping("/create")
     fun createTopic(
         @RequestBody @Valid topic: TopicForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<TopicView?> {
+        uriBuilder: UriComponentsBuilder) : ResponseEntity<TopicView> {
         val topicView = topicService.createTopic(topic)
         val uri = uriBuilder.path("/topic/${topicView.id}").build().toUri()
         return ResponseEntity.created(uri).body(topicView)
