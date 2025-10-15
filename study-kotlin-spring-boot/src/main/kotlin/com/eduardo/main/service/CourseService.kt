@@ -4,8 +4,8 @@ import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.database.Course
 import com.eduardo.main.model.form.CourseForm
 import com.eduardo.main.model.mapper.CourseMapper
-import com.eduardo.main.repository.CourseRepository
 import com.eduardo.main.model.view.CourseView
+import com.eduardo.main.repository.CourseRepository
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

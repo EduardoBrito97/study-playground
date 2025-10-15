@@ -2,8 +2,8 @@ package com.eduardo.main.controller
 
 import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.CourseForm
-import com.eduardo.main.service.CourseService
 import com.eduardo.main.model.view.CourseView
+import com.eduardo.main.service.CourseService
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable

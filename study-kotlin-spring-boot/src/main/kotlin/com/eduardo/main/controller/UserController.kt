@@ -2,8 +2,8 @@ package com.eduardo.main.controller
 
 import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.form.UserForm
-import com.eduardo.main.service.UserService
 import com.eduardo.main.model.view.UserView
+import com.eduardo.main.service.UserService
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.data.domain.Pageable

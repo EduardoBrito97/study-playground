@@ -1,11 +1,11 @@
 package com.eduardo.main.model.mapper
 
+import com.eduardo.main.model.database.Topic
 import com.eduardo.main.model.dto.TopicDto
 import com.eduardo.main.model.form.TopicForm
-import com.eduardo.main.model.database.Topic
+import com.eduardo.main.model.view.TopicView
 import com.eduardo.main.service.CourseService
 import com.eduardo.main.service.UserService
-import com.eduardo.main.model.view.TopicView
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 

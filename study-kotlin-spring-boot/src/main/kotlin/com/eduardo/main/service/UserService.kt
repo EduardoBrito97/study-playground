@@ -5,8 +5,8 @@ import com.eduardo.main.model.database.User
 import com.eduardo.main.model.dto.UserDetail
 import com.eduardo.main.model.form.UserForm
 import com.eduardo.main.model.mapper.UserMapper
-import com.eduardo.main.repository.UserRepository
 import com.eduardo.main.model.view.UserView
+import com.eduardo.main.repository.UserRepository
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Pageable
 import org.springframework.security.core.userdetails.UserDetails
