@@ -2,7 +2,6 @@ package com.eduardo.main.model.view
 
 import java.time.LocalDateTime
 
-
 data class TopicView(
     var id: Long? = null,
     var title: String,
@@ -10,5 +9,5 @@ data class TopicView(
     var date: LocalDateTime = LocalDateTime.now(),
     var courseId: Long,
     var authorId: Long,
-    var answersIds: List<Long>
+    var answersIds: List<Long>,
 )

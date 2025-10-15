@@ -10,5 +10,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TopicRepository : JpaRepository<Topic, Long> {
     @Query("select topic from Topic topic where topic.course.name = :courseName")
-    fun findByCourseName(@Param("courseName") courseName: String, pageable: Pageable): List<Topic>
+    fun findByCourseName(
+        @Param("courseName") courseName: String,
+        pageable: Pageable,
+    ): List<Topic>
 }

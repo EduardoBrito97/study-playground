@@ -3,7 +3,6 @@ package com.eduardo.main.model.dto
 import com.eduardo.main.model.enums.TopicStatus
 import java.time.LocalDateTime
 
-
 data class TopicDto(
     var id: Long? = null,
     var title: String,

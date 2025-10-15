@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.time.LocalDateTime
 
-
 data class TopicForm(
     var id: Long? = null,
     @field:NotEmpty @Size(min = 5, max = 100) var title: String,

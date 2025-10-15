@@ -16,24 +16,28 @@ import org.springframework.web.util.UriComponentsBuilder
 @RequestMapping("/topic")
 @Tag(name = "Topics API", description = "Endpoints for managing topics")
 class TopicController(
-    private val topicService: TopicService
+    private val topicService: TopicService,
 ) {
-
     @PostMapping("/create")
     fun createTopic(
         @RequestBody @Valid topic: TopicForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<TopicView> {
+        uriBuilder: UriComponentsBuilder,
+    ): ResponseEntity<TopicView> {
         val topicView = topicService.createTopic(topic)
         val uri = uriBuilder.path("/topic/${topicView.id}").build().toUri()
         return ResponseEntity.created(uri).body(topicView)
     }
 
     @PutMapping("/update")
-    fun updateTopic(@RequestBody @Valid  topic: TopicForm) = topicService.updateTopic(topic)
+    fun updateTopic(
+        @RequestBody @Valid topic: TopicForm,
+    ) = topicService.updateTopic(topic)
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteTopic(@PathVariable id: Long) {
+    fun deleteTopic(
+        @PathVariable id: Long,
+    ) {
         if (topicService.fetchTopic(id) == null) {
             throw NotFoundException("topic", id)
         }
@@ -41,13 +45,13 @@ class TopicController(
     }
 
     @GetMapping("/{id}")
-    fun getTopic(@PathVariable id: Long) : TopicView {
+    fun getTopic(
+        @PathVariable id: Long,
+    ): TopicView {
         val topic = topicService.fetchTopic(id)
         return topic ?: throw NotFoundException("topic", id)
     }
 
     @GetMapping("/list")
-    fun listTopics(
-        pageable: Pageable
-    ) = topicService.fetchAllTopics(pageable)
+    fun listTopics(pageable: Pageable) = topicService.fetchAllTopics(pageable)
 }

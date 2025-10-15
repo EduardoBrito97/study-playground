@@ -15,16 +15,15 @@ import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.RegexRequestMatcher
 
-
 @Configuration
 @EnableWebSecurity
-class SecurityConfiguration (
+class SecurityConfiguration(
     private val userService: UserService,
     private val jwtUtil: JWTUtil,
     private val objectMapper: ObjectMapper,
-){
-    @Bean
+) {
     // Removing the ROLE_ prefix from all roles
+    @Bean
     fun grantedAuthorityDefaults(): GrantedAuthorityDefaults = GrantedAuthorityDefaults("")
 
     @Bean
@@ -40,7 +39,10 @@ class SecurityConfiguration (
     }
 
     @Bean
-    fun filterChain(http: HttpSecurity, authManager: AuthenticationManager) : SecurityFilterChain {
+    fun filterChain(
+        http: HttpSecurity,
+        authManager: AuthenticationManager,
+    ): SecurityFilterChain {
         http
             // turns off CSRF protection by removing the CsrfFilter from the security filter chain. Useful for stateless applications
             .csrf { it.disable() }
@@ -53,24 +55,20 @@ class SecurityConfiguration (
                         RegexRequestMatcher.regexMatcher(".*\\/delete.*"),
 //                        RegexRequestMatcher.regexMatcher(".*\\/list.*"),
 //                            RegexRequestMatcher.regexMatcher(".*\\/login")
-                    )
-                    .hasAuthority("write")
-                    .anyRequest().authenticated()
-            }
-            .addFilterBefore(
-                JWTLoginFilter(authManager, jwtUtil, objectMapper), UsernamePasswordAuthenticationFilter::class.java
-            )
-            .addFilterBefore(
-                JWTAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter::class.java
-            )
-            .sessionManagement {
+                    ).hasAuthority("write")
+                    .anyRequest()
+                    .authenticated()
+            }.addFilterBefore(
+                JWTLoginFilter(authManager, jwtUtil, objectMapper),
+                UsernamePasswordAuthenticationFilter::class.java,
+            ).addFilterBefore(
+                JWTAuthenticationFilter(jwtUtil),
+                UsernamePasswordAuthenticationFilter::class.java,
+            ).sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            }
-            .formLogin {
+            }.formLogin {
                 it.disable()
-            }
-            .httpBasic { }
+            }.httpBasic { }
         return http.orBuild
     }
-
 }

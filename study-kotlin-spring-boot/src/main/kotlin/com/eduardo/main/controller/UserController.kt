@@ -16,24 +16,28 @@ import org.springframework.web.util.UriComponentsBuilder
 @RequestMapping("/user")
 @Tag(name = "Users API", description = "Endpoints for managing users")
 class UserController(
-    private val userService: UserService
+    private val userService: UserService,
 ) {
-
     @PostMapping("/create")
     fun createUser(
         @RequestBody @Valid user: UserForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<UserView> {
+        uriBuilder: UriComponentsBuilder,
+    ): ResponseEntity<UserView> {
         val userView = userService.createUser(user)
         val uri = uriBuilder.path("/user/${userView.id}").build().toUri()
         return ResponseEntity.created(uri).body(userView)
     }
 
     @PutMapping("/update")
-    fun updateUser(@RequestBody @Valid user: UserForm) = userService.updateUser(user)
+    fun updateUser(
+        @RequestBody @Valid user: UserForm,
+    ) = userService.updateUser(user)
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteUser(@PathVariable id: Long) {
+    fun deleteUser(
+        @PathVariable id: Long,
+    ) {
         if (userService.fetchUser(id) == null) {
             throw NotFoundException("user", id)
         }
@@ -41,13 +45,13 @@ class UserController(
     }
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable id: Long) : UserView {
+    fun getUser(
+        @PathVariable id: Long,
+    ): UserView {
         val user = userService.fetchUser(id)
         return user ?: throw NotFoundException("user", id)
     }
 
     @GetMapping("/list")
-    fun listUsers(
-        pageable: Pageable
-    ) = userService.fetchAllUsers(pageable)
+    fun listUsers(pageable: Pageable) = userService.fetchAllUsers(pageable)
 }

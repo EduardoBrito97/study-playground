@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    val userMapper: UserMapper
+    val userMapper: UserMapper,
 ) : UserDetailsService {
-
     @Transactional
     fun createUser(userForm: UserForm): UserView {
         val user = userMapper.formToModel(userForm)
@@ -49,9 +48,7 @@ class UserService(
 
     fun fetchUserDatabase(id: Long): User = userRepository.findById(id).orElseThrow { NotFoundException("user", id) }
 
-    fun fetchAllUsers(
-        pageable: Pageable
-    ) = userRepository.findAll(pageable).map { userMapper.modelToView(it) }
+    fun fetchAllUsers(pageable: Pageable) = userRepository.findAll(pageable).map { userMapper.modelToView(it) }
 
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username)

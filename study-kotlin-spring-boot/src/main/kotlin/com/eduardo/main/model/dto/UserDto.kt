@@ -4,5 +4,5 @@ data class UserDto(
     var id: Long? = null,
     var name: String = "",
     var username: String = "",
-    var password: String = ""
+    var password: String = "",
 )

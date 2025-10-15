@@ -7,7 +7,7 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport
 @SpringBootApplication
 // Enabling pageable serialization
 @EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
-class AppStartup()
+class AppStartup
 
 fun main(args: Array<String>) {
     runApplication<AppStartup>(*args)

@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface AnswerRepository : JpaRepository<Answer, Long> {
     @Query("select answer from Answer answer where answer.topic.id = :topicId")
-    fun findByTopic(@Param("topicId") topicId: Long): List<Answer>
+    fun findByTopic(
+        @Param("topicId") topicId: Long,
+    ): List<Answer>
 }

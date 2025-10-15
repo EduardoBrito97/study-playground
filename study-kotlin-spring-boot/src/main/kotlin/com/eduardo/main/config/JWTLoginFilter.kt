@@ -11,13 +11,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
-class JWTLoginFilter (
+class JWTLoginFilter(
     private val authManager: AuthenticationManager,
     private val jwtUtil: JWTUtil,
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) : UsernamePasswordAuthenticationFilter() {
-
-    override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication? {
+    override fun attemptAuthentication(
+        request: HttpServletRequest?,
+        response: HttpServletResponse?,
+    ): Authentication? {
         val (username, password) = objectMapper.readValue(request?.inputStream, Credentials::class.java)
         val token = UsernamePasswordAuthenticationToken(username, password)
         return authManager.authenticate(token)
@@ -27,7 +29,7 @@ class JWTLoginFilter (
         request: HttpServletRequest?,
         response: HttpServletResponse?,
         chain: FilterChain?,
-        authResult: Authentication?
+        authResult: Authentication?,
     ) {
         val user = authResult?.principal as UserDetail
         val username = user.username

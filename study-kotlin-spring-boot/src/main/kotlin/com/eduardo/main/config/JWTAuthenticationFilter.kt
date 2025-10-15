@@ -8,14 +8,13 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class JWTAuthenticationFilter (
-    private val jwtUtil: JWTUtil
+class JWTAuthenticationFilter(
+    private val jwtUtil: JWTUtil,
 ) : OncePerRequestFilter() {
-
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         val rawToken = request.getHeader("Authorization")
         val token = getTokenDetail(rawToken)
@@ -27,11 +26,9 @@ class JWTAuthenticationFilter (
         filterChain.doFilter(request, response)
     }
 
-    private fun getTokenDetail(rawToken: String?) : String? {
-        return rawToken?.let { jwt ->
+    private fun getTokenDetail(rawToken: String?): String? =
+        rawToken?.let { jwt ->
             jwt.startsWith("Bearer ")
             jwt.substring(7, jwt.length)
         }
-    }
-
 }

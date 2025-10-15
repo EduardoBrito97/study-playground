@@ -11,26 +11,19 @@ class Topic(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-
     @Column(nullable = false)
     val title: String,
-
     @Column(nullable = false)
     val message: String,
-
     @Column(nullable = false)
     val date: LocalDateTime = LocalDateTime.now(),
-
     @ManyToOne
     val course: Course,
-
     @ManyToOne
     val author: User,
-
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     val status: TopicStatus = TopicStatus.UNANSWERED,
-
     @ElementCollection(targetClass = Answer::class)
     @OneToMany(mappedBy = "topic")
     val answers: List<Answer> = ArrayList(),

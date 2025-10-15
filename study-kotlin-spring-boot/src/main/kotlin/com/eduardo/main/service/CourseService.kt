@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class CourseService(
     private val courseRepository: CourseRepository,
-    private val courseMapper: CourseMapper
+    private val courseMapper: CourseMapper,
 ) {
-
     @Transactional
     fun createCourse(courseForm: CourseForm): CourseView {
         val course = courseMapper.formToModel(courseForm)
@@ -44,12 +43,10 @@ class CourseService(
         }
     }
 
-    fun fetchCourseDatabase(id: Long): Course =
-        courseRepository.findById(id).orElseThrow { NotFoundException("course", id) }
+    fun fetchCourseDatabase(id: Long): Course = courseRepository.findById(id).orElseThrow { NotFoundException("course", id) }
 
-    fun fetchAllCourses(
-        pageable: Pageable
-    ) = courseRepository.findAll(pageable).map {
-        courseMapper.modelToView(it)
-    }
+    fun fetchAllCourses(pageable: Pageable) =
+        courseRepository.findAll(pageable).map {
+            courseMapper.modelToView(it)
+        }
 }

@@ -5,13 +5,12 @@ import org.springframework.security.core.GrantedAuthority
 
 @Entity
 @Table(name = "roles")
-class Role (
+class Role(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-
     @Column(nullable = false)
-    val name: String = ""
+    val name: String = "",
 ) : GrantedAuthority {
     constructor() : this(null, "")
 

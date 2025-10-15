@@ -11,24 +11,25 @@ import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-
 @Component
-class JWTUtil (
-    private val userService: UserService
+class JWTUtil(
+    private val userService: UserService,
 ) {
     companion object {
         const val EXPIRATION = 60000L
     }
 
     @Value("\${jwt.secret}")
-    private lateinit var key : String
+    private lateinit var key: String
 
     fun generateToken(
         username: String?,
         password: String?,
-        authorities: Collection<GrantedAuthority?>?) : String? {
+        authorities: Collection<GrantedAuthority?>?,
+    ): String? {
         val secretKey = Keys.hmacShaKeyFor(key.toByteArray(StandardCharsets.UTF_8))
-        return Jwts.builder()
+        return Jwts
+            .builder()
             .subject("$username:$password")
             .claim("role", authorities)
             .expiration(Date(System.currentTimeMillis() + EXPIRATION))
@@ -39,16 +40,26 @@ class JWTUtil (
     fun isValid(token: String?): Boolean {
         val secretKey = Keys.hmacShaKeyFor(key.toByteArray(StandardCharsets.UTF_8))
         return try {
-            Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token)
+            Jwts
+                .parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
             true
-        } catch (exception : IllegalArgumentException) {
+        } catch (exception: IllegalArgumentException) {
             return false
         }
     }
 
-    fun getAuthentication(token: String?) : Authentication {
+    fun getAuthentication(token: String?): Authentication {
         val secretKey = Keys.hmacShaKeyFor(key.toByteArray(StandardCharsets.UTF_8))
-        val usernameAndPassword =  Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).payload.subject
+        val usernameAndPassword =
+            Jwts
+                .parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .payload.subject
         val splitIndex = usernameAndPassword.indexOf(":")
         val username = usernameAndPassword.take(splitIndex)
         val password = usernameAndPassword.substring(splitIndex)

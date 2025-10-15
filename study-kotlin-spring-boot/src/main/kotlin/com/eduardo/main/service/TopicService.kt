@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class TopicService(
     private val topicRepository: TopicRepository,
-    private val topicMapper: TopicMapper
+    private val topicMapper: TopicMapper,
 ) {
-
     @Transactional
     fun createTopic(topicForm: TopicForm): TopicView {
         val topic = topicMapper.formToModel(topicForm)
@@ -44,17 +43,17 @@ class TopicService(
         }
     }
 
-    fun fetchTopicDatabase(id: Long): Topic =
-        topicRepository.findById(id).orElseThrow { NotFoundException("topic", id) }
+    fun fetchTopicDatabase(id: Long): Topic = topicRepository.findById(id).orElseThrow { NotFoundException("topic", id) }
 
-    fun fetchAllTopics(
-        pageable: Pageable
-    ) = topicRepository.findAll(pageable).map {
-        topicMapper.modelToView(it)
-    }
-
-    fun fetchByCourse(courseName: String, pageable: Pageable) =
-        topicRepository.findByCourseName(courseName, pageable).map {
+    fun fetchAllTopics(pageable: Pageable) =
+        topicRepository.findAll(pageable).map {
             topicMapper.modelToView(it)
         }
+
+    fun fetchByCourse(
+        courseName: String,
+        pageable: Pageable,
+    ) = topicRepository.findByCourseName(courseName, pageable).map {
+        topicMapper.modelToView(it)
+    }
 }

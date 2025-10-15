@@ -16,24 +16,28 @@ import org.springframework.web.util.UriComponentsBuilder
 @RequestMapping("/course")
 @Tag(name = "Courses API", description = "Endpoints for managing courses")
 class CourseController(
-    private val courseService: CourseService
+    private val courseService: CourseService,
 ) {
-
     @PostMapping("/create")
     fun createCourse(
         @RequestBody @Valid course: CourseForm,
-        uriBuilder: UriComponentsBuilder) : ResponseEntity<CourseView> {
+        uriBuilder: UriComponentsBuilder,
+    ): ResponseEntity<CourseView> {
         val courseView = courseService.createCourse(course)
         val uri = uriBuilder.path("/course/${courseView.id}").build().toUri()
         return ResponseEntity.created(uri).body(courseView)
     }
 
     @PutMapping("/update")
-    fun updateCourse(@RequestBody @Valid course: CourseForm) = courseService.updateCourse(course)
+    fun updateCourse(
+        @RequestBody @Valid course: CourseForm,
+    ) = courseService.updateCourse(course)
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCourse(@PathVariable id: Long) {
+    fun deleteCourse(
+        @PathVariable id: Long,
+    ) {
         if (courseService.fetchCourse(id) == null) {
             throw NotFoundException("course", id)
         }
@@ -41,13 +45,13 @@ class CourseController(
     }
 
     @GetMapping("/{id}")
-    fun getCourse(@PathVariable id: Long) :CourseView {
+    fun getCourse(
+        @PathVariable id: Long,
+    ): CourseView {
         val course = courseService.fetchCourse(id)
         return course ?: throw NotFoundException("course", id)
     }
 
     @GetMapping("/list")
-    fun listCourses(
-        pageable: Pageable
-    ) = courseService.fetchAllCourses(pageable)
+    fun listCourses(pageable: Pageable) = courseService.fetchAllCourses(pageable)
 }

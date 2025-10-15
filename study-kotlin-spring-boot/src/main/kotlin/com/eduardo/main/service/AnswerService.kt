@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class AnswerService(
     private val answerRepository: AnswerRepository,
-    private val answerMapper: AnswerMapper
+    private val answerMapper: AnswerMapper,
 ) {
-
     @Transactional
     fun createAnswer(answerForm: AnswerForm): AnswerView {
         val answer = answerMapper.formToModel(answerForm)
@@ -46,23 +45,19 @@ class AnswerService(
 
     fun fetchAnswerDatabase(id: Long) = answerRepository.findById(id).orElseThrow { NotFoundException("answer", id) }
 
-    fun fetchAllAnswers(
-        pageable: Pageable
-    ) = answerRepository.findAll(pageable).map { answerMapper.modelToView(it) }
+    fun fetchAllAnswers(pageable: Pageable) = answerRepository.findAll(pageable).map { answerMapper.modelToView(it) }
 
-    fun fetchAnswerFromTopic(topicId: Long?): List<AnswerView> {
-        return if (topicId == null) {
+    fun fetchAnswerFromTopic(topicId: Long?): List<AnswerView> =
+        if (topicId == null) {
             listOf()
         } else {
             answerRepository.findByTopic(topicId).map { answerMapper.modelToView(it) }.toList()
         }
-    }
 
-    fun fetchAnswerFromTopicEntity(topicId: Long?): List<Answer> {
-        return if (topicId == null) {
+    fun fetchAnswerFromTopicEntity(topicId: Long?): List<Answer> =
+        if (topicId == null) {
             listOf()
         } else {
             answerRepository.findByTopic(topicId)
         }
-    }
 }

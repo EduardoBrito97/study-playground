@@ -10,21 +10,16 @@ class Answer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-
     @Column(nullable = false)
     val message: String,
-
     @Column(nullable = false)
     val date: LocalDateTime = LocalDateTime.now(),
-
     @JoinColumn(name = "user_id")
     @ManyToOne
     val author: User,
-
     @JoinColumn(name = "topic_id")
     @ManyToOne
     val topic: Topic,
-
     @Column(nullable = false)
     val isSolver: Boolean,
 ) : Serializable {
