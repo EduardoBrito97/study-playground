@@ -4,8 +4,8 @@ import com.eduardo.main.exception.NotFoundException
 import com.eduardo.main.model.database.Topic
 import com.eduardo.main.model.form.TopicForm
 import com.eduardo.main.model.mapper.TopicMapper
-import com.eduardo.main.repository.TopicRepository
 import com.eduardo.main.model.view.TopicView
+import com.eduardo.main.repository.TopicRepository
 import jakarta.transaction.Transactional
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -52,4 +52,9 @@ class TopicService(
     ) = topicRepository.findAll(pageable).map {
         topicMapper.modelToView(it)
     }
+
+    fun fetchByCourse(courseName: String, pageable: Pageable) =
+        topicRepository.findByCourseName(courseName, pageable).map {
+            topicMapper.modelToView(it)
+        }
 }
