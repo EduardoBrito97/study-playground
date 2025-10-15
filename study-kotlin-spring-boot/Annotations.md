@@ -1,6 +1,6 @@
 # Kotlin & Co
 
-Although it is possible to use ```data class``` in Kotlin to define entities, it is not recommended to do so. Check the reasons on https://martinsjavacode.medium.com/por-que-n%C3%A3o-usar-data-class-como-entidades-jpa-e-evitar-dor-de-cabe%C3%A7a-9123dd4f9486.
+Although it is possible to use ```data class``` in Kotlin to define entities, it is not recommended to do so. Check the reasons on [this link](https://martinsjavacode.medium.com/por-que-n%C3%A3o-usar-data-class-como-entidades-jpa-e-evitar-dor-de-cabe%C3%A7a-9123dd4f9486).
 
 In order for Spring Boot to be able to inject different beans, services or repositories, it must be able to "visualize it". To do so, its necessary for the package to be children of the package containing the @SpringBootApplication annotation.
 
@@ -14,7 +14,7 @@ Kotlin and spring automatically manipulates the responses into translating it to
 
 Spring deals with JSON bodies by adding the ```@RequestBody``` before the param in the function. To get the param from the path, ```@PathVariable``` is to be used.
 
-To initialize the project, you can use https://start.spring.io/ and select the dependencies you want. We want to have it:
+To initialize the project, you can use [Start Spring IO website](https://start.spring.io/) and select the dependencies you want. We want to have it:
 
 - Spring Web
   - Provides the web framework.
