@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 data class TopicForm(
     var id: Long? = null,
-    @field:NotEmpty @Size(min = 5, max = 100) var title: String,
+    @field:NotEmpty @field:Size(min = 5, max = 100) var title: String,
     @field:NotEmpty var message: String,
     var date: LocalDateTime = LocalDateTime.now(),
     @field:NotNull var courseId: Long,

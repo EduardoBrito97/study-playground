@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class TopicMapper(
     private val courseService: CourseService,
     private val userService: UserService,
-    @Lazy private val answerMapper: AnswerMapper,
+    @field:Lazy private val answerMapper: AnswerMapper,
 ) : Mapper<Topic, TopicDto, TopicForm, TopicView> {
     override fun dtoToModel(dto: TopicDto) =
         Topic(
